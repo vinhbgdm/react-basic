@@ -1,15 +1,12 @@
 import React from "react";      
-import ChildComponent from "./ChildComponent";
-class MyComponent extends React.Component{
+
+class ChildComponent extends React.Component{
     state = {
         firstName: "",
         lastName: "",
-        arrJobs:[
-            {id: '1', title: 'Java Developers', salary:'500$'},
-            {id: '2', title: 'React Tester', salary:'600$'},
-            {id: '3', title: 'Python BA', salary:'700$'}
-        ]
+        age: "",
     }
+
     handleChangeFirstName = (event) => {
         this.setState({
             firstName: event.target.value
@@ -20,30 +17,34 @@ class MyComponent extends React.Component{
             lastName: event.target.value
         })
     }
+    handleChangeAge = (event) => {
+        this.setState({
+            age: event.target.value
+        })
+    }
     handleSubmit = (event) => {
         event.preventDefault()
         alert("Click me")
     }
+
     render() {
+        // let name = this.props.name
+        // let age = this.props.age
         return(
             <div>
                 <form>
                     <label htmlFor="fname">First name:</label><br/>
                     <input type="text" value={this.state.firstName} onChange={(event) => this.handleChangeFirstName(event)}/><br/>
                     <label htmlFor="lname">Last name:</label><br/>
-                    <input type="text" value={this.state.lastName} onChange={(event) => this.handleChangeLastName(event)}/><br/><br/>
+                    <input type="text" value={this.state.lastName} onChange={(event) => this.handleChangeLastName(event)}/><br/>
+                    <label htmlFor="age">Age:</label><br/>
+                    <input type="text" value={this.state.age} onChange={(event) => this.handleChangeAge(event)}/><br/>
                     <input type="submit" value="Submit" onClick={(event) => this.handleSubmit(event)}/>
                 </form>
-
-                <ChildComponent 
-                    name={this.state.firstName}
-                    age={'23'}
-                    address={'Bắc Giang'}
-                    arrJobs={this.state.arrJobs}
-                />
+                Child component: {this.state.firstName} - {this.state.lastName} - {this.state.age}
             </div>
         )
     }
 }
 
-export default MyComponent;
+export default ChildComponent;
