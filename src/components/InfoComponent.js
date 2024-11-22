@@ -1,6 +1,6 @@
 import React from "react";      
 
-class InforComponent extends React.Component{
+class InfoComponent extends React.Component{
     state = {
         isShowListUser: true
     }
@@ -14,6 +14,7 @@ class InforComponent extends React.Component{
         console.log(arrJobs)
         return(
             <div>
+                ---------------------------------------------------------------------------------------------------------------------------<br/>
                 <div>
                     <input type="submit" value={this.state.isShowListUser ? "Hide list user" : "Show list user"} onClick={() => {this.handleShowHide()}} />  
                 </div>
@@ -37,4 +38,4 @@ class InforComponent extends React.Component{
     }
 }
 
-export default InforComponent;
+export default InfoComponent;
