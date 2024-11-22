@@ -1,4 +1,6 @@
 import React from "react";      
+import "../styles/DisplayInfo.scss"
+import logo from "../views/logo.svg"
 
 class InfoComponent extends React.Component{
     state = {
@@ -13,8 +15,9 @@ class InfoComponent extends React.Component{
         let {name, age, address, arrJobs} = this.props
         console.log(arrJobs)
         return(
-            <div>
+            <div className="display-info">
                 ---------------------------------------------------------------------------------------------------------------------------<br/>
+                <img src={logo} alt=""/>
                 <div>
                     <input type="submit" value={this.state.isShowListUser ? "Hide list user" : "Show list user"} onClick={() => {this.handleShowHide()}} />  
                 </div>
