@@ -25,12 +25,21 @@ class MyComponent extends React.Component{
             arrChilds: [childObj, ...this.state.arrChilds]
         })
     }
+
+    handleDeleteInfo = (infoId) => {
+        let listInfoClone = this.state.arrChilds
+        listInfoClone = listInfoClone.filter(item => item.id !== infoId)
+        this.setState({
+            arrChilds: listInfoClone
+        })
+    }
     
     render() {
         return(
-            <div>
+            <>
                 <ChildComponent
                     handleAddNewInfo = {this.handleAddNewInfo}
+                    handleDeleteInfo = {this.handleDeleteInfo}
                     arrChilds = {this.state.arrChilds}
                 />
                 <InfoComponent
@@ -39,7 +48,7 @@ class MyComponent extends React.Component{
                     address = {this.state.address}
                     arrJobs = {this.state.arrJobs}
                 />
-            </div>
+            </>
         )
     }
 }

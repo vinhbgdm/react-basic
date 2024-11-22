@@ -24,7 +24,6 @@ class ChildComponent extends React.Component{
     }
     handleSubmit = (event) => {
         event.preventDefault()
-        // alert("Click me")
         this.props.handleAddNewInfo({
             id: Math.floor((Math.random() * 100) + 1) + 'rd',
             firstName: this.state.firstName,
@@ -48,12 +47,13 @@ class ChildComponent extends React.Component{
                     <input type="submit" value="Add" onClick={(event) => this.handleSubmit(event)}/>
                 </form>
                 Add child component: {this.state.firstName} - {this.state.lastName} - {this.state.age}
-                <div className="childsList">
+                <div className="childs-list">
                     {
                         arrChilds.map((item, index) => {
                             return (
-                                <div key={item.id}>
+                                <div key={item.id} className="info-item">
                                     {item.id} - {item.firstName} - {item.lastName} - {item.age}
+                                    <button onClick={() => this.props.handleDeleteInfo(item.id)}>X</button>
                                 </div>
                             )
                         })
