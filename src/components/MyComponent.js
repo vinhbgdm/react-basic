@@ -1,56 +1,47 @@
-import React from "react";      
+import React, { useState } from "react";      
 import ChildComponent from "./ChildComponent";
 import InfoComponent from "./InfoComponent";
 
-class MyComponent extends React.Component{
-    state = {
-        firstName: "Component1",
-        lastName: "Component1",
-        age: "25",
-        address: 'Bắc Giang',
-        arrJobs:[
-            {id: '1', title: 'Java Developer', salary:'500'},
-            {id: '2', title: 'React Tester', salary:'600'},
-            {id: '3', title: 'Python BA', salary:'700'}
-        ],
-        arrChilds:[
-            {id: '1', firstName: 'Vinh', lastName: 'Vinh', age: '23'},
-            {id: '2', firstName: 'Lê', lastName: 'Ngọc', age: '22'},
-            {id: '3', firstName: 'Kim', lastName: 'Tuyến', age: '22'}
-        ]
+const MyComponent = (props) => {
+    const [listUser, setlistUser] = useState([
+        {id: '1', firstName: 'Ninh', lastName: 'Vinh', age: '23'},
+        {id: '2', firstName: 'Lê', lastName: 'Ngọc', age: '22'},
+        {id: '3', firstName: 'Kim', lastName: 'Tuyến', age: '22'}
+    ]);
+    const [firstName] = useState("NĐV");
+    const [age] = useState("23");
+    const [address] = useState("BG");
+    const [arrJobs] = useState([
+        {id: '1', title: 'Java Developer', salary:'500'},
+        {id: '2', title: 'React Tester', salary:'600'},
+        {id: '3', title: 'Python BA', salary:'700'}
+    ]);
+
+    const handleAddNewInfo = (childObj) => {
+        setlistUser([childObj, ...listUser])
     }
 
-    handleAddNewInfo = (childObj) => {
-        this.setState({
-            arrChilds: [childObj, ...this.state.arrChilds]
-        })
-    }
-
-    handleDeleteInfo = (infoId) => {
-        let listInfoClone = this.state.arrChilds
+    const handleDeleteInfo = (infoId) => {
+        let listInfoClone = listUser
         listInfoClone = listInfoClone.filter(item => item.id !== infoId)
-        this.setState({
-            arrChilds: listInfoClone
-        })
+        setlistUser(listInfoClone)
     }
     
-    render() {
-        return(
-            <>
-                <ChildComponent
-                    handleAddNewInfo = {this.handleAddNewInfo}
-                    handleDeleteInfo = {this.handleDeleteInfo}
-                    arrChilds = {this.state.arrChilds}
-                />
-                <InfoComponent
-                    name = {this.state.firstName}
-                    age = {this.state.age}
-                    address = {this.state.address}
-                    arrJobs = {this.state.arrJobs}
-                />
-            </>
-        )
-    }
+    return(
+        <>
+            <ChildComponent
+                handleAddNewInfo = {handleAddNewInfo}
+                handleDeleteInfo = {handleDeleteInfo}
+                arrChilds = {listUser}
+            />
+            <InfoComponent
+                name = {firstName}
+                age = {age}
+                address = {address}
+                arrJobs = {arrJobs}
+            />
+        </>
+    )
 }
 
 export default MyComponent;
