@@ -1,10 +1,14 @@
 import React from "react";      
 
 class ChildComponent extends React.Component{
-    state = {
-        firstName: "",
-        lastName: "",
-        age: "",
+    constructor(props){
+        console.log("<<< Call consolog 1")
+        super(props);
+        this.state = {
+            firstName: "",
+            lastName: "",
+            age: "",
+        }
     }
 
     handleChangeFirstName = (event) => {
@@ -32,7 +36,23 @@ class ChildComponent extends React.Component{
         });
     }
 
+    componentDidMount(){
+        console.log("<<< Call component did mount 3")
+        setTimeout(() => {
+            document.title = "VinhBGDM"
+        }, 3000)
+    }
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log("<<< Call component did update 4", this.props, prevProps)
+        if(this.props.arrChilds !== prevProps.arrChilds){
+            if(this.props.arrChilds.length === 5){
+                alert("Stop")
+            }
+        }
+    }
+
     render() {
+        console.log("<<< Call render")
         // let childsList = this.props.arrChilds
         let {arrChilds} = this.props
         return(
