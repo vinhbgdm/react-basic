@@ -1,4 +1,4 @@
-import React, { useState } from "react";      
+import React, { useEffect, useState } from "react";      
 
 const ChildComponent = (props) => {
     const {arrChilds} = props;
@@ -24,6 +24,13 @@ const ChildComponent = (props) => {
             age: age
         });
     }
+    console.log("Call render")
+    useEffect(() => {
+        console.log("Call useEffect")
+        setTimeout(() => {
+            document.title = "VinhBGDM"
+        }, 3000)
+    }, [arrChilds])
     return(
         <div>
             <form>
