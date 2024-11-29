@@ -1,6 +1,6 @@
 import "./App.scss";
 import Header from "../components/Header/Header";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
@@ -16,13 +16,6 @@ function App() {
           <Outlet />
         </div>
       </div>
-      {/* <div>
-        <div>
-          <button><Link to="/users">Go to User page</Link></button>
-          <button><Link to="/admins">Go to Admin page</Link></button>
-        </div>
-        Ninh Đình Vinh
-      </div> */}
     </div>
   );
 }
