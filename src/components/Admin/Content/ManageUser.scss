@@ -1,6 +1,19 @@
+.manage-user-container {
+    padding: 10px;
+    .title {
+        font-weight: 600;
+        font-size: 20px;
+    }
+    .user-content {
+        .btn-add-new {
+            margin: 15px 0;
+        }
+    }
+}
+
 .modal-add-user {
     .image-preview {
-        height: 150px;
+        height: 250px;
         border: 1px dashed #ccc;
         border-radius: 5px;
         display: flex;
@@ -16,7 +29,6 @@
         display: flex;
         align-items: center;
         gap: 5px;
-        border: 1px solid red;
         width: fit-content;
         border-radius: 5px;
         background-color: #eeeeee;

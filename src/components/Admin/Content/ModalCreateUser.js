@@ -2,12 +2,20 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
+import axios from 'axios';
 
-const ModalCreateUser = () => {
-    const [show, setShow] = useState(false);
+const ModalCreateUser = (props) => {
+    const {show, setShow} = props;
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setShow(false);
+        setEmail("");
+        setPassword("");
+        setUsername("");
+        setRole("USER");
+        setImage("");
+        setPreviewImage("")
+    };
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,14 +31,22 @@ const ModalCreateUser = () => {
         } else {
             // setPreviewImage("")
         }
+        console.log(image)
+    }
+
+    const handleSubmitCreateUser = async () => {
+        const data = new FormData();
+        data.append('email', email);
+        data.append('password', password);
+        data.append('username', username);
+        data.append('role', role);
+        data.append('userImage', image);
+        let res = await axios.post('http://localhost:8081/api/v1/participant', data)
+        console.log(">>>>> Check response", res)
     }
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Add new user
-            </Button>
-
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -58,7 +74,7 @@ const ModalCreateUser = () => {
                         </div>
                         <div className="col-md-4">
                             <label className="form-label">Role</label>
-                            <select className="form-select" onChange={(event) => setRole(event.target.value)}>
+                            <select className="form-select" onChange={(event) => setRole(event.target.value)} value={role}>
                                 <option value="USER">USER</option>
                                 <option value="ADMIN">ADMIN</option>
                             </select>
@@ -69,6 +85,7 @@ const ModalCreateUser = () => {
                         </div>
                         <div className="col-md-12 image-preview">
                             {
+                                // eslint-disable-next-line jsx-a11y/alt-text
                                 previewImage ? <img src={previewImage} />
                                 : <span>Preview Image</span>
                             }
@@ -79,7 +96,7 @@ const ModalCreateUser = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary">Add</Button>
+                    <Button variant="primary" onClick={() => handleSubmitCreateUser()}>Add</Button>
                 </Modal.Footer>
             </Modal>
         </>
