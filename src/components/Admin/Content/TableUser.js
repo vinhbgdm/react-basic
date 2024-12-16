@@ -1,23 +1,5 @@
-import { useEffect, useState } from "react";
-import { getAllUser } from '../../../services/apiService'
-
 const TableUser = (props) => {
-    const [listUser, setListUser] = useState([
-
-    ]);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(async () => {
-        fetchListUser()
-    }, []);
-
-    const fetchListUser = async () => {
-        let res = await getAllUser()
-        console.log(res)
-        if(res.EC === 0){
-            setListUser(res.DT)
-        }
-    }
+    const {listUser} = props;
 
     return (
         <>
@@ -28,6 +10,7 @@ const TableUser = (props) => {
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
