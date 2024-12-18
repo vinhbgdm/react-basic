@@ -25,11 +25,11 @@ const ModalDeleteUser = (props) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} size='lg'>
                 <Modal.Header closeButton>
                     <Modal.Title>Confirm delete the user ?</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure to delete this user email = <b>{dataUpdate && dataUpdate.email ? dataUpdate.email : ""}</b> ?</Modal.Body>
+                <Modal.Body>Are you sure to delete this user email <b>{dataUpdate && dataUpdate.email ? dataUpdate.email : ""}</b> ?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
