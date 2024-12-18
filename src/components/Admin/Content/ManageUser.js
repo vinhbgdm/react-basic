@@ -6,22 +6,24 @@ import { useEffect, useState } from "react";
 import { getAllUser } from '../../../services/apiService'
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
+import ModalDeleteUser from "./ModalDeleteUser";
 
 const ManageUser = (props) => {
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
     const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
     const [showModalViewUser, setShowModalViewUser] = useState(false);
+    const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
+
     const [listUser, setListUser] = useState([]);
     const [dataUpdate, setDataUpdate] = useState({});
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(async () => {
-        fetchListUser()
+    useEffect(() => {
+        fetchListUser();
     }, []);
 
     const fetchListUser = async () => {
         let res = await getAllUser()
-        console.log(res)
         if(res.EC === 0){
             setListUser(res.DT)
         }
@@ -41,6 +43,11 @@ const ManageUser = (props) => {
         setDataUpdate(user)
     }
 
+    const handleClickBtnDelete = (user) => {
+        setShowModalDeleteUser(true)
+        setDataUpdate(user)
+    }
+
     return (
         <div className="manage-user-container">
             <div className="title">
@@ -55,6 +62,7 @@ const ManageUser = (props) => {
                         listUser={listUser}
                         handleClickBtnUpdate={handleClickBtnUpdate}
                         handleClickBtnView={handleClickBtnView}
+                        handleClickBtnDelete={handleClickBtnDelete}
                     />
                 </div>
                 <ModalCreateUser 
@@ -75,6 +83,12 @@ const ManageUser = (props) => {
                     dataUpdate={dataUpdate}
                     fetchListUser={fetchListUser}
                     resetUpdateData={resetUpdateData}
+                />
+                <ModalDeleteUser 
+                    show={showModalDeleteUser}
+                    setShow={setShowModalDeleteUser}
+                    dataUpdate={dataUpdate}
+                    fetchListUser={fetchListUser}
                 />
             </div>
         </div>

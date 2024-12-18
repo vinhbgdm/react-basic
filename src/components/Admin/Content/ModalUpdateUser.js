@@ -88,7 +88,7 @@ const ModalUpdateUser = (props) => {
                         <div className="col-md-6">
                             <label className="form-label">Password</label>
                             
-                            <input type="password" className="form-control" value={password} disabled onChange={(event) => setPassword(event.target.value)}/>
+                            <input type="password" className="form-control" value={"*******"} disabled onChange={(event) => setPassword(password)}/>
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Username</label>
